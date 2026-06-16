@@ -66,6 +66,7 @@ function handleDelete(id) {
         Due: {{ task.dueDate }}
       </template>
     </TaskCard>
+    <div v-if="tasks.length === 0">No tasks left!</div>
   </div>
 </template>
 
