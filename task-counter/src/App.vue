@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import TaskCounter from './views/TaskCounter.vue'
+import TaskCounter from './views/TaskListView.vue'
 </script>
 
 <template>
