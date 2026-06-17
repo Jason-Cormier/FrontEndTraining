@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import TaskCounter from './views/Day1/TaskCounter.vue'
-import TaskListView from './views/Day2/TaskListView.vue'
+  import { RouterView } from 'vue-router'
 </script>
 
 <template>
-  <TaskListView />
+  <RouterView />
 </template>
