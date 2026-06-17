@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import TaskCounter from './views/TaskCounter.vue'
-import TaskListView from './views/TaskListView.vue'
+import TaskCounter from './views/Day1/TaskCounter.vue'
+import TaskListView from './views/Day2/TaskListView.vue'
 </script>
 
 <template>
-  <TaskCounter />
+  <TaskListView />
 </template>

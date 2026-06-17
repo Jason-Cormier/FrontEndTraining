@@ -12,9 +12,9 @@ import TaskCard from './TaskCard.vue'
 // Each task: { id, name, done, dueDate }
 // const tasks = ref([...])
 const tasks = ref([
-  { id: 1, name: 'Task 1', done: false, dueDate: '2024-06-10' },
-  { id: 2, name: 'Task 2', done: true, dueDate: '2024-06-15' },
-  { id: 3, name: 'Task 3', done: false, dueDate: '2024-06-12' }
+  { id: 1, name: 'Task 1', done: false, dueDate: '2024-06-10', priority: 'high' },
+  { id: 2, name: 'Task 2', done: true, dueDate: '2024-06-15', priority: 'medium' },
+  { id: 3, name: 'Task 3', done: false, dueDate: '2024-06-12', priority: 'low' }
 ])
 
 // TODO 2: Write handleComplete(id) — toggle the done state of the task with this id
@@ -28,6 +28,11 @@ function handleComplete(id) {
 function handleDelete(id) {
   // your code here
   tasks.value = tasks.value.filter(task => task.id !== id)
+}
+
+function handleUpdate(payload) {
+  const task = tasks.value.find(task => task.id === payload.id)
+  if (task) {task.name = payload.name}
 }
 </script>
 
@@ -59,8 +64,10 @@ function handleDelete(id) {
       v-for="task in tasks"
       :key="task.id"
       :task="task"
+      :priority="task.priority"
       @complete="handleComplete"
       @delete="handleDelete"
+      @update="handleUpdate"
     >
       <template #meta>
         Due: {{ task.dueDate }}

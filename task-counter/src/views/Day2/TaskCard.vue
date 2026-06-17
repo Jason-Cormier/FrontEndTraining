@@ -61,6 +61,7 @@ HINTS (read only if stuck)
 
 <!-- ─── TaskCard.vue ─── -->
 <script setup>
+import { ref } from 'vue'
 // TODO 1: import defineProps and defineEmits (they are compiler macros — no import needed
 //          but you DO need to call them)
 
@@ -70,12 +71,36 @@ const props = defineProps({
   task: {
     type: Object,
     required: true
+  },
+  priority: {
+    type: String,
+    required: false,
+    default: 'low'
   }
 })
 
 // TODO 3: Define emits for 'complete' and 'delete'
 // const emit = defineEmits([...])
-const emit = defineEmits(['complete', 'delete'])
+const emit = defineEmits(['complete', 'delete', 'update'])
+
+const isEditing = ref(false)
+const editedName = ref('')
+
+function startEdit() {
+  isEditing.value = true
+  editedName.value = props.task.name
+}
+
+function saveEdit() {
+  if (!editedName.value.trim()) return
+
+  emit('update', {
+    id: props.task.id,
+    name: editedName.value
+  })
+
+  isEditing.value = false
+}
 </script>
 
 <template>
@@ -85,11 +110,25 @@ const emit = defineEmits(['complete', 'delete'])
 
     <div class="task-header">
       <!-- TODO 5: Display the task name -->
-       <span class="name">{{ props.task.name }}</span>
+      <span
+        v-if="!isEditing"
+        class="name"
+        @click="startEdit"
+      >{{ props.task.name }}</span>
+
+      <input
+        v-else
+        v-model="editedName"
+        @keyup.enter="saveEdit"
+      />
+
+      <button v-if="isEditing" @click="saveEdit">Save</button>
+
+      <span class="priority" :class="props.priority">{{ props.priority }}</span>
 
       <!-- TODO 6: Add the named slot for metadata -->
       <!-- <slot name="meta" /> -->
-       <slot name="meta" />
+      <slot name="meta" />
     </div>
 
     <div class="task-actions">
@@ -153,5 +192,24 @@ const emit = defineEmits(['complete', 'delete'])
   border-radius: 6px;
   cursor: pointer;
   font-size: 13px;
+}
+.priority {
+  font-size: 11px;
+  font-weight: bold;
+  padding: 2px 8px;
+  border-radius: 10px;
+  text-transform: uppercase;
+}
+.low {
+  background: #d1fae5;
+  color: #065f46;
+}
+.medium {
+  background: #fef3c7;
+  color: #92400e;
+}
+.high {
+  background: #fee2e2;
+  color: #dc2626;
 }
 </style>
