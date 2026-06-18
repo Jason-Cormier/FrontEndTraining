@@ -7,7 +7,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useTaskStore } from '@/stores/taskStore'
+import { useTaskStore } from '@/stores/Day3/taskStore'
 
 // TODO 1: Get the current route and router instances
 // const route  = useRoute()
@@ -53,9 +53,32 @@ function goBack() {
 </template>
 
 <style scoped>
-.detail-view { max-width: 520px; margin: 40px auto; padding: 24px; font-family: Arial, sans-serif; }
-.back-btn { background: none; border: 1px solid #ddd; border-radius: 6px; padding: 6px 14px; cursor: pointer; margin-bottom: 20px; }
-.back-btn:hover { background: #f3f4f6; }
-h1 { color: #1B2A4A; font-size: 24px; margin-bottom: 12px; }
-p { color: #4A5568; font-size: 15px; margin: 6px 0; }
+.detail-view { 
+  max-width: 520px; 
+  margin: 40px auto; 
+  padding: 24px; 
+  font-family: Arial, sans-serif; 
+}
+.back-btn { 
+  background: none; 
+  border: 1px solid #ddd; 
+  border-radius: 6px; 
+  padding: 6px 14px; 
+  cursor: pointer; 
+  margin-bottom: 20px; 
+}
+.back-btn:hover { 
+  background: #f3f4f6; 
+  color: black;
+}
+h1 { 
+  color: white; 
+  font-size: 24px; 
+  margin-bottom: 12px; 
+}
+p { 
+  color: #42B883; 
+  font-size: 15px; 
+  margin: 6px 0; 
+}
 </style>

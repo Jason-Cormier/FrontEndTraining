@@ -7,7 +7,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { useTaskStore } from '@/stores/taskStore'
+import { useTaskStore } from '@/stores/Day3/taskStore'
 
 const taskStore = useTaskStore()
 const route     = useRoute()
@@ -19,7 +19,7 @@ const showErrorBanner = computed(() => route.query.error === 'notfound')
 
 <template>
   <div class="home-view">
-    <h1>📝 My Tasks</h1>
+    <h1>My Tasks</h1>
 
     <!-- TODO 2: Show a warning banner if showErrorBanner is true -->
     <!-- <div class="error-banner" v-if="showErrorBanner">
@@ -32,7 +32,9 @@ const showErrorBanner = computed(() => route.query.error === 'notfound')
     <nav class="page-nav">
       <!-- TODO 3: Add a RouterLink to /about -->
       <!-- <RouterLink to="/about">About</RouterLink> -->
+      <RouterLink to="/home">Home</RouterLink>
       <RouterLink to="/about">About</RouterLink>
+      <RouterLink to="/stats">Stats</RouterLink>
     </nav>
 
     <!-- TODO 4: Render each task as a RouterLink to /task/:id -->
@@ -49,13 +51,71 @@ const showErrorBanner = computed(() => route.query.error === 'notfound')
 </template>
 
 <style scoped>
-.home-view { max-width: 520px; margin: 40px auto; padding: 24px; font-family: Arial, sans-serif; }
-h1 { color: #1B2A4A; margin-bottom: 16px; }
-.error-banner { background: #fef3c7; border: 1px solid #f59e0b; border-radius: 6px; padding: 10px 14px; margin-bottom: 16px; color: #92400e; font-size: 14px; }
-.page-nav { margin-bottom: 20px; }
-.page-nav a { color: #42B883; text-decoration: none; font-weight: 600; }
-.task-list { list-style: none; padding: 0; margin: 0; }
-.task-list li { padding: 12px; background: white; border-radius: 8px; margin-bottom: 8px; border: 1px solid #eee; cursor: pointer; }
-.task-list li:hover { border-color: #42B883; }
-.done { text-decoration: line-through; color: #9ca3af; }
+.home-view { 
+  width: auto; 
+  margin: 40px auto; 
+  padding: 24px; 
+  font-family: Arial, sans-serif;
+}
+h1 { 
+  color: white; 
+  margin-bottom: 20px;
+}
+.error-banner { 
+  background: #fef3c7; 
+  border: 1px solid #f59e0b; 
+  border-radius: 6px; 
+  padding: 10px 14px; 
+  margin-bottom: 16px; 
+  color: #92400e; 
+  font-size: 14px; 
+}
+.page-nav { 
+  display: flex;
+  gap: 12px;
+  margin-bottom: 10px;
+  justify-content: center;
+}
+.page-nav a { 
+  color: #42B883; 
+  text-decoration: none; 
+  font-weight: 600; 
+}
+.page-nav a.router-link-exact-active {
+  color: white;
+  padding: 0 3px;
+  border-radius: 3px;
+  background-color: #2b7a57;
+}
+.task-list { 
+  list-style: none; 
+  padding: 0; 
+  margin: 0; 
+  justify-content: center;
+}
+.task-list li { 
+  padding: 12px; 
+  background: rgb(56, 56, 56); 
+  border-radius: 8px; 
+  margin-bottom: 8px; 
+  border: 1px solid #eee; 
+  cursor: pointer;
+}
+.task-list li:hover { 
+  border-color: #42B883;
+}
+.task-list li:hover a {
+  color: #42B883;
+}
+.task-list li a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  display: block;
+  width: 100%; 
+}
+.done { 
+  text-decoration: line-through; 
+  color: #9ca3af; 
+}
 </style>
