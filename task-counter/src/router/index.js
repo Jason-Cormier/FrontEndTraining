@@ -61,10 +61,13 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/Day3/HomeView.vue'
 import TaskDetailView from '@/views/Day3/TaskDetailView.vue'
 import AboutView from '@/views/Day3/AboutView.vue'
+import StatsView from '@/views/Day3/StatsView.vue'
+
+import TaskListView from '@/views/Day4/TaskListView.vue'
 
 // TODO 2: Import your Pinia task store so the guard can check if a task exists
 // import { useTaskStore } from '@/stores/taskStore'
-import { useTaskStore } from '@/stores/taskStore'
+import { useTaskStore } from '@/stores/Day4/taskStore.js'
 
 const routes = [
   // TODO 3: Add a redirect from '/' to '/home'
@@ -83,6 +86,10 @@ const routes = [
   // TODO 6: Add the /about route
   // { path: '/about', component: AboutView },
   { path: '/about', component: AboutView},
+
+  { path: '/stats', component: StatsView},
+
+  { path: '/day4', component: TaskListView}
 ]
 
 const router = createRouter({
