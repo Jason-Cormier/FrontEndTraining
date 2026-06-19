@@ -9,5 +9,10 @@ export const useUserStore = defineStore('user', () => {
         isLoggedIn.value = true
     }
 
-    return { currentUser, isLoggedIn, login }
-})
+    function logout() {
+        currentUser.value = ''
+        isLoggedIn.value = false
+    }
+
+    return { currentUser, isLoggedIn, login, logout }
+}, { persist: true })

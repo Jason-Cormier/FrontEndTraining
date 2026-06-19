@@ -33,7 +33,7 @@ const userStore = useUserStore()
 
 const { currentUser, isLoggedIn } = storeToRefs(userStore)
 
-const { login } = userStore
+const { login, logout } = userStore
 
 const loginName = ref('')
 
@@ -60,6 +60,7 @@ function handleLogin() {
 
     <div v-else class="user-header">
       <p>Welcome, {{ currentUser }}! 👋</p>
+      <button @click="logout">Logout</button>
     </div>
 
     <!-- TODO 6: Display totalCount, doneCount, pendingCount from the store -->
@@ -105,5 +106,6 @@ h1 { color: #1B2A4A; }
 .login-form { display: flex; gap: 8px; margin-bottom: 16px; }
 .login-form input { flex: 1; padding: 8px 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; }
 .login-form button { padding: 8px 16px; background: #1B2A4A; color: white; border: none; border-radius: 6px; cursor: pointer; }
-.user-header { margin-bottom: 16px; font-weight: bold; color: #1b2a4a; }
+.user-header { display: flex; align-items: center; justify-content: center; margin-bottom: 16px; font-weight: bold; color: #1b2a4a; gap: 10px; }
+.user-header button { padding: 5px 12px; background: #fee2e2; color: #dc2626; border: none; border-radius: 6px; cursor: pointer; font-size: 13px; }
 </style>
