@@ -17,11 +17,15 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: 'tab1',
-        component: () => import('@/views/Tab1Page.vue')
+        component: () => import('@/views/TasksPage.vue')
+      },
+      {
+        path: 'tab1/tasks/:id',
+        component: () => import('@/views/TaskDetailPage.vue')
       },
       {
         path: 'tab2',
-        component: () => import('@/views/Tab2Page.vue')
+        component: () => import('@/views/CompletedPage.vue')
       },
       {
         path: 'tab3',

@@ -25,6 +25,8 @@ import {
 // import { useTaskStore } from '@/stores/taskStore'
 import { useTaskStore } from '@/stores/taskStore'
 
+import { useRouter } from 'vue-router'
+
 // TODO 2: Get the store instance
 // const taskStore = useTaskStore()
 const taskStore = useTaskStore()
@@ -44,6 +46,12 @@ function handleAdd() {
   // TODO 5: Call addTask() from the store, then clear the input
   addTask(newTaskName.value)
   newTaskName.value = ''
+}
+
+const router = useRouter()
+
+function goToDetail(id) {
+  router.push(`/tabs/tab1/tasks/${id}`)
 }
 </script>
 
@@ -68,11 +76,12 @@ function handleAdd() {
       </ion-item>
       <ion-button expand="block" @click="handleAdd">Add Task</ion-button>
       <ion-list>
-        <ion-item v-for="task in tasks" :key="task.id">
+        <ion-item v-for="task in tasks" :key="task.id" @click="goToDetail(task.id)">
           <ion-checkbox
             slot="start"
             :checked="task.done"
             @ionChange="toggleTask(task.id)"
+            @click.stop
           />
           <ion-label :class="{ done: task.done }">{{ task.name }}</ion-label>
           <ion-button
@@ -80,6 +89,7 @@ function handleAdd() {
             fill="outline"
             color="danger"
             @click="removeTask(task.id)"
+            @click.stop
           >Remove</ion-button>
         </ion-item>
       </ion-list>
