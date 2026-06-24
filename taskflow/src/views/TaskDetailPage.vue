@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useTaskStore } from '@/stores/taskStore.js'
 import { storeToRefs } from 'pinia';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera'
 import {
     IonPage,
     IonHeader,
@@ -11,9 +12,11 @@ import {
     IonContent,
     IonBackButton,
     IonButtons,
+    IonButton,
     IonLabel,
     IonItem,
-    IonList
+    IonList,
+    IonImg
 } from '@ionic/vue'
 
 const route = useRoute()
@@ -22,6 +25,19 @@ const { tasks } = storeToRefs(taskStore)
 const task = computed(() =>
     tasks.value.find(t => t.id === Number(route.params.id))
 )
+const { addPhotoToTask } = taskStore
+const pickMedia = async () => {
+  try {
+    const photo = await Camera.getPhoto({
+      resultType: CameraResultType.Uri,
+      source: CameraSource.Photos,
+      quality: 90
+    })
+    addPhotoToTask(task.value.id, photo.webPath)
+  } catch (e) {
+    console.log('Photo cancelled or failed', e)
+  }
+}
 </script>
 
 <template>
@@ -52,6 +68,12 @@ const task = computed(() =>
                             ID: {{ route.params.id }}
                         </ion-label>
                     </ion-item>
+                    <ion-button expand="block" @click="pickMedia">📷 Add Photo</ion-button>
+                    <ion-img
+                        v-if="task.photo"
+                        :src="task.photo"
+                        style="width: 100%; margin-top: 16px; border-radius: 8px;"
+                    />
                 </ion-list>
             </div>
             <div v-else>

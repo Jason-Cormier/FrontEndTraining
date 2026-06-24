@@ -18,7 +18,8 @@ import {
   IonLabel,
   IonInput,
   IonButton,
-  IonCheckbox
+  IonCheckbox,
+  IonImg
 } from '@ionic/vue'
 
 // TODO 1: Import your store
@@ -84,12 +85,17 @@ function goToDetail(id) {
             @click.stop
           />
           <ion-label :class="{ done: task.done }">{{ task.name }}</ion-label>
+          <ion-img
+            v-if="task.photo"
+            :src="task.photo"
+            slot="end"
+            style="width: 40px; height: 40px; border-radius: 4px; object-fit: cover;"
+          />
           <ion-button
             slot="end"
             fill="outline"
             color="danger"
-            @click="removeTask(task.id)"
-            @click.stop
+            @click.stop="removeTask(task.id)"
           >Remove</ion-button>
         </ion-item>
       </ion-list>
