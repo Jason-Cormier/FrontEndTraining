@@ -29,11 +29,11 @@ const { addPhotoToTask } = taskStore
 const pickMedia = async () => {
   try {
     const photo = await Camera.getPhoto({
-      resultType: CameraResultType.Uri,
+      resultType: CameraResultType.DataUrl,
       source: CameraSource.Photos,
       quality: 90
     })
-    addPhotoToTask(task.value.id, photo.webPath)
+    addPhotoToTask(task.value.id, photo.dataUrl)
   } catch (e) {
     console.log('Photo cancelled or failed', e)
   }
